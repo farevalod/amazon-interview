@@ -1,0 +1,39 @@
+<html>
+<body>
+<script>
+
+function get_data_and_fill_table(){
+    var username = document.getElementById("username").value;
+    var address = document.getElementById("address").value;
+    var phone = document.getElementById("phone").value;
+    
+    var table = document.getElementById("user-table");
+
+    var row = table.insertRow(0);
+    
+    var user_cell = row.insertCell(0);
+    var address_cell = row.insertCell(1);
+    var phone_cell = row.insertCell(2);
+    
+    user_cell.innerHTML = username;
+    address_cell.innerHTML = address;
+    phone_cell.innerHTML = phone;
+    return 0;
+ }
+    
+</script>
+<input id="username" type="text" name="username">
+<input id="address" type="text" name="address">
+<input id="phone" type="text" name="phone">
+<button onclick="get_data_and_fill_table()">go</button>
+<table id="user-table">
+<thead>
+<tr>
+<td>username</td>
+<td>address</td>
+<td>phone</td>
+</tr>
+</thead>
+</table>
+</body>
+</html>
