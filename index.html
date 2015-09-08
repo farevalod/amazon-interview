@@ -20,20 +20,50 @@ function get_data_and_fill_table(){
     phone_cell.innerHTML = phone;
     return 0;
  }
+
+function save_in_localstorage(){
+	localStorage.clear();
+    var table = document.getElementById("user-table");
+	var rows = table.rows;
+	out = [];
+	for(i=0;i<rows.length;i++){
+		for(j=0;j<rows[i].cells.length;j++){
+			line = {"username":rows[i].cells[0].innerHTML,"address":rows[i].cells[1].innerHTML,"phone":rows[i].cells[2].innerHTML};
+			console.log(rows[i]);
+		}
+		out.push(line);
+	}
+	window.localStorage.setItem('dataArray', JSON.stringify(out));
+	window.localStorage.setItem('length', out.length);
+
+	return 0;
+}
+
+function load_from_storage(){
+	var lines = window.localStorage.getItem('dataArray');
+    var table = document.getElementById("user-table");
+	lines = JSON.parse(lines);
+	for(i=0;i<lines.length;i++){
+		var row = table.insertRow(0);
+		console.log(lines[i])
+		var user_cell = row.insertCell(0);
+		var address_cell = row.insertCell(1);
+		var phone_cell = row.insertCell(2);
+		user_cell.innerHTML = lines[i].username;
+		address_cell.innerHTML = lines[i].address;
+		phone_cell.innerHTML = lines[i].phone;
+
+	}
+}
     
 </script>
-<input id="username" type="text" name="username">
-<input id="address" type="text" name="address">
-<input id="phone" type="text" name="phone">
+<input id="username" type="text" name="username" placeholder="username">
+<input id="address" type="text" name="address" placeholder="address">
+<input id="phone" type="text" name="phone" placeholder="phone">
 <button onclick="get_data_and_fill_table()">go</button>
 <table id="user-table">
-<thead>
-<tr>
-<td>username</td>
-<td>address</td>
-<td>phone</td>
-</tr>
-</thead>
 </table>
+<button onclick="save_in_localstorage()">save</button>
+<button onclick="load_from_storage()">load</button>
 </body>
 </html>
